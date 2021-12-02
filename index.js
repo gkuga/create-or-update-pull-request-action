@@ -53,6 +53,7 @@ async function main() {
       labels: core.getInput("labels"),
       assignees: core.getInput("assignees"),
       autoMerge: core.getInput("auto-merge"),
+      disableAutoUpdatePR: core.getInput("disable-auto-update-pr"),
     };
 
     core.debug(`Inputs: ${inspect(inputs)}`);
@@ -150,9 +151,18 @@ async function main() {
       });
 
       if (data.total_count > 0) {
+        const { number } = data.items[0]
         core.info(
-          `Existing pull request for branch "${inputs.branch}" updated: ${data.items.html_url}`
+          `Existing pull request for branch "${inputs.branch}" updated: #${number})`
         );
+        if (inputs.disableAutoUpdatePR) return
+        await octokit.request(`POST /repos/{owner}/{repo}/pulls/{number}`, {
+          owner,
+          repo,
+          number,
+          title: inputs.title,
+          body: inputs.body,
+        });
         return;
       }
     }
