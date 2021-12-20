@@ -160,8 +160,6 @@ jobs:
           title: Test pull request
           body: This pull request is part of the CI  - please ignore.
           branch: test-update-pr-title-and-body
-          commit-message: "Just testing [skip ci]"
-          author: "J. Doe <j@example.com>"
       - uses: ./
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -176,7 +174,7 @@ jobs:
         with:
           title: Updated test pull request
           body: This updated pull request is part of the CI  - please ignore.
-          updatePRTitleAndBody: true
+          update-pull-request-title-and-body: true
       - run: "git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git :test-update-pr-title-and-body"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
