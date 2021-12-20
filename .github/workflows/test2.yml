@@ -160,10 +160,6 @@ jobs:
           title: Test pull request
           body: This pull request is part of the CI  - please ignore.
           branch: test-update-pr-title-and-body
-          commit-message: "Just testing [skip ci]"
-          author: "J. Doe <j@example.com>"
-          labels: test1, test2
-          #assignees: gr2m
       - uses: ./
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
