@@ -153,7 +153,7 @@ async function main() {
       if (data.total_count > 0) {
         const { number } = data.items[0]
         core.info(
-          `Existing pull request for branch "${inputs.branch}" updated: #${number})`
+          `Existing pull request for branch "${inputs.branch}" updated: (#${number})`
         );
         if (!inputs.updatePRTitleAndBody) return
         await octokit.request(`POST /repos/{owner}/{repo}/pulls/{number}`, {
