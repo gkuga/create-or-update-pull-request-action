@@ -160,13 +160,15 @@ jobs:
           title: Test pull request
           body: This pull request is part of the CI  - please ignore.
           branch: test-update-pr-title-and-body
+      - run: "echo updated >> test.txt"
       - uses: ./
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACTIONS_STEP_DEBUG: true
         with:
-          title: Updated test pull request
-          body: This updated pull request is part of the CI  - please ignore.
+          title: Skipped Updated test pull request
+          body: This Skipped updated pull request is part of the CI  - please ignore.
+      - run: "echo updated >> test.txt"
       - uses: ./
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
