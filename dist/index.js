@@ -582,7 +582,7 @@ async function main() {
         core.info(
           `Existing pull request for branch "${inputs.branch}" updated: (#${number})`
         );
-        if (!inputs.updatePRTitleAndBody) return
+        if (inputs.updatePRTitleAndBody !== true) return
         await octokit.request(`POST /repos/{owner}/{repo}/pulls/{number}`, {
           owner,
           repo,
@@ -590,7 +590,6 @@ async function main() {
           title: inputs.title,
           body: inputs.body,
         });
-        core.info(inputs.updatePRTitleAndBody)
         core.info(
           `PR title and body are updated`
         );
