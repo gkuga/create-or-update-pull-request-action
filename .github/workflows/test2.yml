@@ -179,7 +179,7 @@ jobs:
           title: Updated test pull request
           body: This updated pull request is part of the CI  - please ignore.
           updatePRTitleAndBody: true
-      - run: "git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git :test-create-new-pull-request"
+      - run: "git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git :test-update-pr-title-and-body"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
