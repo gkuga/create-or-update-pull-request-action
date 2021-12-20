@@ -584,7 +584,7 @@ async function main() {
         );
 				core.info(inputs.updatePRTitleAndBody)
 				core.info(typeof(inputs.updatePRTitleAndBody))
-        if (inputs.updatePRTitleAndBody !== true || inputs.updatePRTitleAndBody !== 'true') return
+        if (inputs.updatePRTitleAndBody === false || inputs.updatePRTitleAndBody === 'false') return
         await octokit.request(`POST /repos/{owner}/{repo}/pulls/{number}`, {
           owner,
           repo,
