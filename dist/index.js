@@ -590,6 +590,7 @@ async function main() {
           title: inputs.title,
           body: inputs.body,
         });
+        core.info(inputs.updatePRTitleAndBody)
         core.info(
           `PR title and body are updated`
         );
