@@ -53,6 +53,7 @@ async function main() {
       labels: core.getInput("labels"),
       assignees: core.getInput("assignees"),
       autoMerge: core.getInput("auto-merge"),
+      updatePRTitleAndBody: core.getInput("update-pull-request-title-and-body"),
     };
 
     core.debug(`Inputs: ${inspect(inputs)}`);
@@ -150,8 +151,22 @@ async function main() {
       });
 
       if (data.total_count > 0) {
+        const { number } = data.items[0]
         core.info(
-          `Existing pull request for branch "${inputs.branch}" updated: ${data.items.html_url}`
+          `Existing pull request for branch "${inputs.branch}" updated: (#${number})`
+        );
+				core.info(inputs.updatePRTitleAndBody)
+				core.info(typeof(inputs.updatePRTitleAndBody))
+        if (inputs.updatePRTitleAndBody === false || inputs.updatePRTitleAndBody === 'false') return
+        await octokit.request(`POST /repos/{owner}/{repo}/pulls/{number}`, {
+          owner,
+          repo,
+          number,
+          title: inputs.title,
+          body: inputs.body,
+        });
+        core.info(
+          `PR title and body are updated`
         );
         return;
       }
